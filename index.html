@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Authentrix — AI Media Forensics</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #081018;
+            color: #f5f7fa;
+            min-height: 100vh;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom: 1px solid #1c2933;
+
+            background: #081018;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .logo-box {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #42d6c4,
+                    #7775ed
+                );
+
+            color: #071017;
+
+            font-size: 23px;
+            font-weight: 900;
+        }
+
+
+        .logo span {
+            color: #4fd5c5;
+        }
+
+
+        nav ul {
+            list-style: none;
+
+            display: flex;
+            align-items: center;
+
+            gap: 40px;
+        }
+
+
+        nav a {
+            color: #aebbc9;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            transition: 0.2s ease;
+        }
+
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: calc(100vh - 80px);
+
+            padding: 95px 7% 70px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.05fr 0.95fr;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+
+        .hero-left {
+            max-width: 720px;
+        }
+
+
+        /* ================= EYEBROW ================= */
+
+        .eyebrow {
+            display: inline-block;
+
+            padding: 11px 19px;
+
+            border: 1px solid #267c7d;
+
+            border-radius: 30px;
+
+            color: #4fd5c5;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 38px;
+        }
+
+
+        /* ================= HEADLINE ================= */
+
+        .headline {
+            font-size: clamp(55px, 6vw, 82px);
+
+            line-height: 0.98;
+
+            letter-spacing: -4px;
+
+            font-weight: 800;
+
+            margin-bottom: 38px;
+        }
+
+
+        .headline-white {
+            color: #f5f7fa;
+        }
+
+
+        .headline-gradient {
+            display: block;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #4fd5c5,
+                    #59c7d9,
+                    #7775ed
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
+        }
+
+
+        /* ================= DESCRIPTION ================= */
+
+        .description {
+            color: #9aabba;
+
+            font-size: 18px;
+
+            line-height: 1.65;
+
+            max-width: 700px;
+
+            margin-bottom: 38px;
+        }
+
+
+        /* ================= HERO BUTTONS ================= */
+
+        .hero-buttons {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+
+        /* ================= VERIFY BUTTON ================= */
+
+        .verify-button {
+            display: inline-block;
+
+            padding: 17px 30px;
+
+            border-radius: 10px;
+
+            background: #43d6c4;
+
+            color: #071017;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            transition: 0.2s ease;
+        }
+
+
+        .verify-button:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.92;
+        }
+
+
+        /* ================= REGISTER MEDIA BUTTON ================= */
+
+        .register-media-button {
+            display: inline-block;
+
+            padding: 17px 30px;
+
+            border-radius: 10px;
+
+            background: transparent;
+
+            border: 1px solid #3b9e9d;
+
+            color: #4fd5c5;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            transition: 0.2s ease;
+        }
+
+
+        .register-media-button:hover {
+            transform: translateY(-2px);
+
+            background: #13262b;
+
+            border-color: #4fd5c5;
+        }
+
+
+        /* ================= RIGHT CARD ================= */
+
+        .forensics-card {
+            background: #101a24;
+
+            border: 1px solid #293b49;
+
+            border-radius: 32px;
+
+            padding: 54px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0, 0, 0, 0.20);
+        }
+
+
+        /* ================= CARD ICON ================= */
+
+        .card-icon {
+            width: 98px;
+            height: 98px;
+
+            border-radius: 26px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #172a39;
+
+            border: 1px solid #267276;
+
+            margin-bottom: 32px;
+        }
+
+
+        .diamond {
+            width: 21px;
+            height: 21px;
+
+            border: 3px solid #4fd5c5;
+
+            transform: rotate(45deg);
+        }
+
+
+        /* ================= CARD TITLE ================= */
+
+        .forensics-card h2 {
+            font-size: 36px;
+
+            margin-bottom: 18px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .card-description {
+            color: #91a8bd;
+
+            font-size: 17px;
+
+            line-height: 1.65;
+
+            margin-bottom: 34px;
+        }
+
+
+        /* ================= ANALYSIS ITEMS ================= */
+
+        .analysis-item {
+            background: #172432;
+
+            border: 1px solid #2a3b49;
+
+            border-radius: 18px;
+
+            padding: 23px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .analysis-item:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .analysis-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+
+        .analysis-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            border: 2px solid #4fd5c5;
+        }
+
+
+        .analysis-item p {
+            color: #91a8bd;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= BOTTOM INFO ================= */
+
+        .bottom-section {
+            padding: 0 7% 70px;
+        }
+
+
+        .info-grid {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .info-card {
+            padding: 25px;
+
+            border-radius: 18px;
+
+            background: #0e1821;
+
+            border: 1px solid #22313d;
+        }
+
+
+        .info-card h3 {
+            margin-bottom: 9px;
+
+            font-size: 17px;
+        }
+
+
+        .info-card p {
+            color: #8498aa;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                gap: 50px;
+
+                padding-top: 65px;
+            }
+
+
+            .hero-left {
+                max-width: 800px;
+            }
+
+
+            .forensics-card {
+                max-width: 800px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+
+            nav ul {
+                gap: 18px;
+            }
+
+
+            nav a {
+                font-size: 13px;
+            }
+
+
+            .logo {
+                font-size: 21px;
+            }
+
+
+            .logo-box {
+                width: 38px;
+                height: 38px;
+            }
+
+
+            .hero {
+                padding: 50px 6% 60px;
+            }
+
+
+            .headline {
+                font-size: 52px;
+
+                letter-spacing: -2.5px;
+            }
+
+
+            .description {
+                font-size: 16px;
+            }
+
+
+            .hero-buttons {
+                flex-direction: column;
+
+                align-items: stretch;
+
+                width: 100%;
+            }
+
+
+            .hero-buttons .verify-button,
+            .hero-buttons .register-media-button {
+
+                width: 100%;
+
+                text-align: center;
+            }
+
+
+            .forensics-card {
+                padding: 30px;
+
+                border-radius: 24px;
+            }
+
+
+            .forensics-card h2 {
+                font-size: 28px;
+            }
+
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .bottom-section {
+                padding: 0 6% 50px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            nav ul {
+                gap: 12px;
+            }
+
+
+            nav a {
+                font-size: 12px;
+            }
+
+
+            .headline {
+                font-size: 44px;
+            }
+
+
+            .eyebrow {
+                font-size: 11px;
+
+                letter-spacing: 1.5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+
+        <div class="logo">
+
+            <div class="logo-box">
+                A
+            </div>
+
+            Authen<span>trix</span>
+
+        </div>
+
+
+        <ul>
+
+
+            <li>
+
+                <a href="index.html">
+
+                    Home
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="verify.html">
+
+                    Verify
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main class="hero">
+
+
+        <!-- ================= LEFT ================= -->
+
+        <section class="hero-left">
+
+
+            <div class="eyebrow">
+
+                AI-POWERED FORENSICS
+
+            </div>
+
+
+            <h1 class="headline">
+
+
+                <span class="headline-white">
+
+                    Trust what you see.
+
+                </span>
+
+
+                <span class="headline-gradient">
+
+                    Detect what you can't see.
+
+                </span>
+
+
+            </h1>
+
+
+            <p class="description">
+
+                Analyze images and videos using
+                AI-powered forensic techniques to
+                identify synthetic and manipulated
+                media signals.
+
+            </p>
+
+
+            <!-- ================= MAIN BUTTONS ================= -->
+
+            <div class="hero-buttons">
+
+
+                <a
+                    href="verify.html"
+                    class="verify-button">
+
+                    Verify Media →
+
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="register-media-button">
+
+                    Register Media →
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================= RIGHT ================= -->
+
+        <section class="forensics-card">
+
+
+            <div class="card-icon">
+
+                <div class="diamond"></div>
+
+            </div>
+
+
+            <h2>
+
+                AI Media Forensics
+
+            </h2>
+
+
+            <p class="card-description">
+
+                Authentrix examines digital media
+                through multiple analysis signals to
+                provide a clear, explainable assessment.
+
+            </p>
+
+
+            <!-- VISUAL -->
+
+            <div class="analysis-item">
+
+
+                <div class="analysis-title">
+
+                    <span class="analysis-dot"></span>
+
+                    Visual Analysis
+
+                </div>
+
+
+                <p>
+
+                    Examine images and video frames
+                    for suspicious AI-generation
+                    indicators.
+
+                </p>
+
+            </div>
+
+
+            <!-- AUDIO -->
+
+            <div class="analysis-item">
+
+
+                <div class="analysis-title">
+
+                    <span class="analysis-dot"></span>
+
+                    Audio Analysis
+
+                </div>
+
+
+                <p>
+
+                    Check video audio for synthetic
+                    or spoofed speech signals.
+
+                </p>
+
+            </div>
+
+
+            <!-- AUDIO-VISUAL -->
+
+            <div class="analysis-item">
+
+
+                <div class="analysis-title">
+
+                    <span class="analysis-dot"></span>
+
+                    Audio-Visual Analysis
+
+                </div>
+
+
+                <p>
+
+                    Examine relationships between
+                    visible speech and corresponding
+                    audio.
+
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= INFORMATION ================= -->
+
+    <section class="bottom-section">
+
+
+        <div class="info-grid">
+
+
+            <div class="info-card">
+
+
+                <h3>
+
+                    Visual Forensics
+
+                </h3>
+
+
+                <p>
+
+                    Analyze visual patterns and
+                    frame-level signals associated
+                    with synthetic media.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="info-card">
+
+
+                <h3>
+
+                    Audio Forensics
+
+                </h3>
+
+
+                <p>
+
+                    Examine audio tracks for signals
+                    associated with synthetic or
+                    spoofed speech.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="info-card">
+
+
+                <h3>
+
+                    Explainable Results
+
+                </h3>
+
+
+                <p>
+
+                    Understand the signals behind
+                    an AI-assisted media assessment.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</body>
+
+</html>
